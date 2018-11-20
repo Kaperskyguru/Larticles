@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "update": "^0.7.4"
+        "update": "^0.7.4",
+        "vue-router": "^3.0.1"
     }
 }

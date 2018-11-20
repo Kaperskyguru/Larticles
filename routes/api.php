@@ -32,4 +32,8 @@ Route::put('article', 'ArticleController@store');
 // Delete article
 Route::delete('article/{id}', 'ArticleController@destroy');
 
+Route::post('/comment', 'CommentsController@index');
+
+
+Route::get('comments/{id}', 'CommentsController@comments');
 

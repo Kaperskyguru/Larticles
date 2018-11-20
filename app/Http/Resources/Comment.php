@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Article extends Resource
+class Comment extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,18 +15,11 @@ class Article extends Resource
     public function toArray($request)
     {
         // return parent::toArray($request);
-
         return [
             'id' => $this->id,
+            'article_id' => $this->article_id,
             'title' => $this->title,
             'body' => $this->body
-        ];
-    }
-
-    public function with($request) {
-        return [
-            'version' => '1.0.0',
-            'author_url' => url('http://codelikemad.com.ng')
         ];
     }
 }

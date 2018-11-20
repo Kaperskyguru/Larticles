@@ -15,7 +15,7 @@
         </form>
 
         <div class="card card-body mb-2" v-for="article in articles" v-bind:key="article.id">
-            <h3>{{ article.title}}</h3>
+            <h3><router-link v-bind:to="'/blog/' + article.id">{{ article.title }}</router-link></h3>
             <p>{{ article.body }}</p>
             <hr>
             <button class="btn btn-info mb-2" @click="editArticle(article)">Edit</button>
@@ -35,6 +35,7 @@
 export default {
     data() {
         return {
+            
             articles: [],
             article: {
                 id: '',
@@ -43,7 +44,8 @@ export default {
             },
             article_id: '',
             pagination: {},
-            edit: false
+            edit: false,
+            single: "single/",
         }
     },
     created() {
@@ -73,7 +75,7 @@ export default {
 
         deleteArticle(id) {
             if(confirm('Are you sure?')) {
-                fetch(`api/article/${id}`, {
+                fetch(`/api/article/${id}`, {
                     method: 'delete'
                     
                 })
@@ -87,7 +89,7 @@ export default {
         },
         addArticle( ) {
             if(this.edit === false){
-                fetch('api/article', {
+                fetch('/api/article', {
                     method: 'post',
                     body: JSON.stringify(this.article),
                     headers: {
@@ -103,7 +105,7 @@ export default {
                 })
                 .catch(err => console.log(err));
             } else {
-                fetch('api/article', {
+                fetch('/api/article', {
                     method: 'put',
                     body: JSON.stringify(this.article),
                     headers: {
@@ -123,7 +125,7 @@ export default {
 
         editArticle:  function(article) {
             this.edit = true;
-            this.article_id = article.id;
+            this.article.article_id = article.id;
             this.article.title = article.title;
             this.article.body = article.body
         }

@@ -7,7 +7,12 @@
 
 require('./bootstrap');
 
+
 window.Vue = require('vue');
+import vueRouter from 'vue-router';
+import Routes from './routes';
+
+Vue.use(vueRouter)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,9 +20,14 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('articles', require('./components/Articles.vue'));
+ const router = new vueRouter({
+    routes:Routes,
+    mode: 'history',
+ });
+
 Vue.component('navbar', require('./components/Navbar.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router:router,
 });

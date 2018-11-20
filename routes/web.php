@@ -1,5 +1,8 @@
 <?php
 
+use App\Article;
+use App\Comment;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +17,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
+
+Route::get('/single/{id}', function ($id) {
+    $article = Article::findOrFail($id);
+    $comment = Comment::where('article_id' ,$id)->get();
+    $data = [
+        'articles' => $article,
+        'comments' => $comment
+    ];
+    return view('Single')->with('data', $data);
+});
+
